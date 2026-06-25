@@ -1,11 +1,11 @@
 # pyrefly: ignore [missing-import]
 import re
 
-from Backend.utils.keyword_detector import detect_keywords
-from Backend.services.domain_age import get_domain_age
-from Backend.services.typosquat_detector import detect_typosquat
-from Backend.services.ssl_checker import check_ssl
-from Backend.services.redirect_checker import check_redirects
+from utils.keyword_detector import detect_keywords
+from services.domain_age import get_domain_age
+from services.typosquat_detector import detect_typosquat
+from services.ssl_checker import check_ssl
+from services.redirect_checker import check_redirects
 
 
 def analyze_url(url):

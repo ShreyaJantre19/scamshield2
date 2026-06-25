@@ -1,8 +1,8 @@
 import os
 import tempfile
 
-from Backend.services.file_analyzer import analyze_file
-from Backend.services.macro_detector import detect_macros
+from services.file_analyzer import analyze_file
+from services.macro_detector import detect_macros
 
 
 async def master_file_analyze(file):
