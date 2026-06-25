@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ScamShield — Settings</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #080e1c;
+      color: #e8edf5;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .card {
+      background: #0f1729;
+      border: 1px solid #1e2d4a;
+      border-radius: 16px;
+      padding: 32px;
+      width: 100%;
+      max-width: 460px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .logo img { width: 40px; height: 40px; border-radius: 10px; }
+    .logo-title {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00d4ff, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo-sub { font-size: 11px; color: #4a5670; }
+    .section { margin-bottom: 24px; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7a8ba8;
+      margin-bottom: 10px;
+    }
+    label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #c8d4e8; }
+    input[type="url"], input[type="text"] {
+      width: 100%;
+      background: #151f35;
+      border: 1px solid #1e2d4a;
+      border-radius: 8px;
+      color: #e8edf5;
+      font-family: 'Inter', monospace;
+      font-size: 13px;
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus {
+      border-color: #00d4ff;
+      box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.12);
+    }
+    .hint { font-size: 11px; color: #4a5670; margin-top: 5px; }
+    .btn-save {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #00d4ff, #7c3aed);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-save:hover { opacity: 0.9; }
+    .status {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 12px;
+      min-height: 18px;
+      color: #00e676;
+    }
+    .divider { border: none; border-top: 1px solid #1e2d4a; margin: 20px 0; }
+    .info-box {
+      background: #151f35;
+      border: 1px solid #1e2d4a;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 11.5px;
+      color: #7a8ba8;
+      line-height: 1.6;
+    }
+    .info-box code {
+      background: #0f1729;
+      border: 1px solid #1e2d4a;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 11px;
+      color: #00d4ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <img src="../icons/icon48.png" alt="ScamShield" />
+      <div>
+        <div class="logo-title">ScamShield</div>
+        <div class="logo-sub">Extension Settings</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">API Configuration</div>
+      <label for="api-base">ScamShield API Base URL</label>
+      <input type="url" id="api-base" placeholder="http://localhost:8000" />
+      <div class="hint">
+        Default: <code>http://localhost:8000</code> (local backend).
+        Change this to your deployed backend URL if hosted remotely.
+      </div>
+    </div>
+
+    <button class="btn-save" id="btn-save">Save Settings</button>
+    <div class="status" id="status"></div>
+
+    <hr class="divider" />
+
+    <div class="section">
+      <div class="section-title">How to use</div>
+      <div class="info-box">
+        <strong>🔗 URL Check:</strong> Click the extension icon → URL tab → paste link → Analyze.<br/><br/>
+        <strong>📧 Email Check:</strong> Email tab → paste sender, subject, body → Analyze.<br/><br/>
+        <strong>🖱️ Right-click:</strong> Right-click any link → "🛡️ Check with ScamShield".<br/><br/>
+        <strong>📄 Page Scan:</strong> Page tab → Scan all links → badges appear next to risky links.<br/><br/>
+        <strong>💬 WhatsApp:</strong> Forward suspicious messages to your ScamShield WhatsApp bot number.
+      </div>
+    </div>
+  </div>
+  <script>
+    const input = document.getElementById('api-base');
+    const status = document.getElementById('status');
+
+    // Load saved setting
+    chrome.storage.local.get(['apiBase'], data => {
+      input.value = data.apiBase || 'http://localhost:8000';
+    });
+
+    document.getElementById('btn-save').addEventListener('click', () => {
+      const val = input.value.trim().replace(/\/$/, '');
+      if (!val) return;
+      chrome.storage.local.set({ apiBase: val }, () => {
+        status.textContent = '✓ Settings saved!';
+        setTimeout(() => status.textContent = '', 2500);
+      });
+    });
+  </script>
+</body>
+</html>
