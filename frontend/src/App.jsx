@@ -8,6 +8,7 @@ import URLChecker from "./pages/URLChecker";
 import FileScanner from "./pages/FileScanner";
 import EmailAnalyzer from "./pages/EmailAnalyzer";
 import Dashboard from "./pages/Dashboard";
+import ChatBot from "./components/ChatBot";
 
 function App() {
   return (
@@ -33,8 +34,10 @@ function App() {
 
       </Routes>
 
+      <ChatBot />
+
     </BrowserRouter>
   );
 }
 
-export default App; 
+export default App;  

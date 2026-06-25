@@ -12,8 +12,7 @@ class URLRequest(BaseModel):
 
     url: str
 
-
 @router.post("/scan/url")
 def scan_url(data: URLRequest):
 
-    return master_analyze(data.url)  
+    return master_analyze(data.url) 

@@ -8,11 +8,19 @@ from routes.email_routes import router as email_router
 from routes.file_routes import router as file_router
 from routes.qr_routes import router as qr_router
 from routes.threat_routes import router as threat_router
+from routes.chatbot_routes import router as chatbot_router
+
 
 app = FastAPI(
     title="ScamShield AI",
     version="1.0"
 )
+
+app.include_router(
+    chatbot_router,
+    prefix="/api"
+) 
+
 
 # CORS
 

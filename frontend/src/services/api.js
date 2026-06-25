@@ -1,8 +1,9 @@
-const API_BASE_URL = "http://127.0.0.1:8000";
 import axios from "axios";
 
+const API_BASE_URL = "http://127.0.0.1:8000";
+
 const API = axios.create({
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: API_BASE_URL,
 });
 
 export const analyzeEmail = async (data) => {
@@ -11,7 +12,7 @@ export const analyzeEmail = async (data) => {
 };
 
 export async function analyzeURL(url) {
-  const response = await fetch(`${API_BASE_URL}/api/url/analyze`, {
+  const response = await fetch(`${API_BASE_URL}/scan/url`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,16 +22,39 @@ export async function analyzeURL(url) {
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Server error: ${response.status} ${errorText}`);
+    throw new Error(
+      `Server error: ${response.status} ${errorText}`
+    );
   }
 
   return response.json();
 }
 
 export async function getReports() {
-  const response = await fetch(`${API_BASE_URL}/reports`);
+  const response = await fetch(
+    `${API_BASE_URL}/reports`
+  );
+
   return response.json();
 }
+
+export async function askChatbot(message) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/chat`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message,
+      }),
+    }
+  );
+
+  return response.json();
+}
+
 export async function analyzeFile(file) {
   const formData = new FormData();
 
@@ -45,4 +69,4 @@ export async function analyzeFile(file) {
   );
 
   return response.json();
-}
+} 
