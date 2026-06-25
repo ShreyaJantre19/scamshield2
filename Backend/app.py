@@ -3,12 +3,13 @@ from fastapi import FastAPI
 # pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes.url_routes import router as url_router
-from routes.email_routes import router as email_router
-from routes.file_routes import router as file_router
-from routes.qr_routes import router as qr_router
-from routes.threat_routes import router as threat_router
-from routes.chatbot_routes import router as chatbot_router
+from backend.routes.url_routes import router as url_router
+from backend.routes.email_routes import router as email_router
+from backend.routes.file_routes import router as file_router
+from backend.routes.qr_routes import router as qr_router
+from backend.routes.threat_routes import router as threat_router
+from backend.routes.chatbot_routes import router as chatbot_router 
+
 
 
 app = FastAPI(
