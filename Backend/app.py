@@ -7,11 +7,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from database.database import engine, Base
-from models.scan import Scan
+from Backend.database.database import engine, Base
+from Backend.models.scan import Scan
 
 # Initialize database tables on startup
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 # Import Routers
 from routes.url_routes import router as url_router 
@@ -47,8 +47,8 @@ app.include_router(file_router, prefix="/api", tags=["File Scanner"])
 app.include_router(qr_router, prefix="/api", tags=["QR Scanner"])
 app.include_router(threat_router, prefix="/api", tags=["Threat Feed"])
 app.include_router(analyze_router, prefix="/api", tags=["Unified Analysis"])
-app.include_router(dashboard_router, prefix="/api", tags=["Dashboard"])
-app.include_router(history_router, prefix="/api", tags=["Scan History"])
+#app.include_router(dashboard_router, prefix="/api", tags=["Dashboard"])
+#app.include_router(history_router, prefix="/api", tags=["Scan History"])
 app.include_router(whatsapp_router, prefix="/api", tags=["WhatsApp Webhook"])
 
 @app.get("/")
