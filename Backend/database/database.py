@@ -9,10 +9,16 @@ print("DATABASE_URL exists:", DATABASE_URL is not None)
 if not DATABASE_URL:
     raise RuntimeError("DATABASE_URL environment variable is not set")
 
+DATABASE_URL = DATABASE_URL.replace(
+    "postgresql://",
+    "postgresql+psycopg://",
+    1
+)
+
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,
-    pool_recycle=300 
+    pool_recycle=300
 )
 
 SessionLocal = sessionmaker(
