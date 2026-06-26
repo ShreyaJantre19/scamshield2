@@ -1,18 +1,30 @@
 {
     "version": 2,
-    "functions": {
-        "Backend/app.py": {
-            "runtime": "python3.12"
-        }
-    },
-    "rewrites": [
+    "builds": [
         {
-            "source": "/api/(.*)",
-            "destination": "/Backend/app.py"
+            "src": "frontend/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "dist"
+            }
         },
         {
-            "source": "/(.*)",
-            "destination": "/frontend/$1"
+            "src": "Backend/app.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "Backend/app.py"
+        },
+        {
+            "src": "/(.*\\.(?:png|jpg|jpeg|gif|svg|ico|js|css|json|woff2?|map|txt|webmanifest))",
+            "dest": "frontend/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "frontend/index.html"
         }
     ]
 }
