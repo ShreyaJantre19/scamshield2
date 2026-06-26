@@ -1,4 +1,4 @@
-from services.url_analyzer import analyze_url
+from Backend.services.url_analyzer import analyze_url
 # pyrefly: ignore [missing-import]
 from services.url_shortener_detector import detect_shortener
 from services.virustotal_service import check_url_virustotal

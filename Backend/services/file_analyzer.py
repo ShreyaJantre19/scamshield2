@@ -1,5 +1,5 @@
 # pyrefly: ignore [missing-import]
-from utils.hash_generator import generate_sha256
+from Backend.utils.hash_generator import generate_sha256
 
 
 def analyze_file(file_path):
