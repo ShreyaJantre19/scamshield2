@@ -11,7 +11,7 @@ from Backend.database.database import engine, Base
 from Backend.models.scan import Scan
 
 # Initialize database tables on startup
-#Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 # Import Routers
 from routes.url_routes import router as url_router 
