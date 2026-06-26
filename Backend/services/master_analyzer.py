@@ -1,13 +1,13 @@
 from Backend.services.url_analyzer import analyze_url
 # pyrefly: ignore [missing-import]
-from services.url_shortener_detector import detect_shortener
-from services.virustotal_service import check_url_virustotal
-from services.safe_browsing_service import check_safe_browsing
+from Backend.services.url_shortener_detector import detect_shortener
+from Backend.services.virustotal_service import check_url_virustotal
+from Backend.services.safe_browsing_service import check_safe_browsing
 # pyrefly: ignore [missing-import]
-from services.phishtank_service import check_phishtank
+from Backend.services.phishtank_service import check_phishtank
 # pyrefly: ignore [missing-import]
-from services.openphish_service import check_openphish
-from services.explanation_generator import generate_explanation
+from Backend.services.openphish_service import check_openphish
+from Backend.services.explanation_generator import generate_explanation
 
 
 def master_analyze(url):

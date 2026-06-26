@@ -1,6 +1,6 @@
 import re
 from rapidfuzz.distance.Levenshtein import normalized_similarity as ratio
-from services.url_service import analyze_url
+from Backend.services.url_service import analyze_url
 
 # ---------------------------------------------------------------------------
 # Constants

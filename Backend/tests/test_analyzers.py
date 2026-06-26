@@ -3,14 +3,10 @@ import os
 import tempfile
 import zipfile
 
-# Add parent directory to sys.path so we can import services
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from services.url_service import analyze_url
-from services.email_service import analyze_email, parse_sender, extract_urls
-from services.qr_service import analyze_qr_risks, detect_qr_type, parse_mailto, parse_wifi
-from services.file_service import analyze_file
+from Backend.services.url_service import analyze_url
+from Backend.services.email_service import analyze_email, parse_sender, extract_urls
+from Backend.services.qr_service import analyze_qr_risks, detect_qr_type, parse_mailto, parse_wifi
+from Backend.services.file_service import analyze_file
 
 
 class TestURLAnalyzer(unittest.TestCase):

@@ -1,7 +1,7 @@
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter
 
-from services.threat_feed import (
+from Backend.services.threat_feed import (
     get_threat_feed
 )
 

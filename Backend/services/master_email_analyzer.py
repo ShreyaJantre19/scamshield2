@@ -1,4 +1,4 @@
-from services.email_service import analyze_email
+from Backend.services.email_service import analyze_email
 
 
 def master_email_analyze(

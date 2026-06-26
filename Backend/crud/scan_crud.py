@@ -1,4 +1,4 @@
-﻿from models.scan import Scan
+﻿from Backend.models.scan import Scan
 
 
 def create_scan(db, scan_type, input_data, score, status):

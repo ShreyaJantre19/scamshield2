@@ -5,7 +5,7 @@ from sqlalchemy import DateTime
 
 from datetime import datetime
 
-from database.database import Base
+from Backend.database.database import Base
 
 
 class Scan(Base):

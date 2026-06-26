@@ -19,8 +19,8 @@ from typing import Optional
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Query, Request
 from fastapi.responses import PlainTextResponse
 
-from services.fusion_service import fused_analyze
-from services.whatsapp_service import (
+from Backend.services.fusion_service import fused_analyze
+from Backend.services.whatsapp_service import (
     download_media,
     extract_urls_from_text,
     format_verdict,

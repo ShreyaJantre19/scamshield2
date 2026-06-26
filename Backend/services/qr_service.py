@@ -1,7 +1,7 @@
 import re
 from PIL import Image
 from rapidfuzz.distance.Levenshtein import normalized_similarity as ratio
-from services.url_service import analyze_url, KEYWORDS, SUSPICIOUS_TLDS, BRANDS
+from Backend.services.url_service import analyze_url, KEYWORDS, SUSPICIOUS_TLDS, BRANDS
 
 # ---------------------------------------------------------------------------
 # Core QR functionality

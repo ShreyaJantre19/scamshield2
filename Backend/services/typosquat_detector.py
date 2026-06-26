@@ -1,6 +1,6 @@
 # pyrefly: ignore [missing-import]
 from rapidfuzz.distance.Levenshtein import distance
-from utils.brand_database import BRANDS
+from Backend.utils.brand_database import BRANDS
 
 
 def detect_typosquat(url):

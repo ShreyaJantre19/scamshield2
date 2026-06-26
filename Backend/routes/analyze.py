@@ -15,9 +15,9 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from database.database import get_db
-from crud.scan_crud import create_scan
-from services.fusion_service import fused_analyze
+from Backend.database.database import get_db
+from Backend.crud.scan_crud import create_scan
+from Backend.services.fusion_service import fused_analyze
 
 router = APIRouter()
 

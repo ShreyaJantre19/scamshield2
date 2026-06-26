@@ -1,5 +1,5 @@
-from services.qr_analyzer import analyze_qr_content
-from services.master_analyzer import master_analyze
+from Backend.services.qr_analyzer import analyze_qr_content
+from Backend.services.master_analyzer import master_analyze
 
 
 def master_qr_analyze(content):

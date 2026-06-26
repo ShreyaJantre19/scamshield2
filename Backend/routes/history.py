@@ -1,8 +1,8 @@
-﻿from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 
-from database.database import get_db
-from crud.scan_crud import get_scans, get_scan_by_id, delete_scan
+from Backend.database.database import get_db
+from Backend.crud.scan_crud import get_scans, get_scan_by_id, delete_scan
 
 router = APIRouter()
 
