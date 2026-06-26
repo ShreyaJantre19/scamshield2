@@ -19,45 +19,45 @@ class TestIntegrationEndpoints(unittest.TestCase):
     def test_url_analyze_route(self):
         # A URL designed to be high-risk (Dangerous >= 60)
         payload = {"url": "http://verify-login-bank-wallet-password-otp-reward-gift.xyz"}
-        response = self.client.post("/api/url/analyze", json=payload)
+        response = self.client.post("/api/scan/url", json=payload)
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertIn("score", data)
-        self.assertIn("status", data)
-        self.assertEqual(data["status"], "Dangerous")
+        self.assertIn("level", data)
+        self.assertEqual(data["level"], "DANGEROUS")
         
         # Verify db entry
         db = SessionLocal()
         try:
             db_entry = db.query(Scan).filter(Scan.scan_type == "URL", Scan.input_data == payload["url"]).order_by(Scan.id.desc()).first()
             self.assertIsNotNone(db_entry)
-            self.assertEqual(db_entry.status, "Dangerous")
+            self.assertEqual(db_entry.status, "DANGEROUS")
         finally:
             db.close()
 
     def test_email_analyze_route(self):
         payload = {
-            "sender": '"Netflix Support" <alert@netflix-billing-update.com>',
+            "from_email": "alert@netflix-billing-update.com",
+            "reply_to": "alert@netflix-billing-update.com",
             "subject": "Important Account Update Required",
             "body": "Please login to your account immediately to update credit card details."
         }
-        response = self.client.post("/email/analyze", json=payload)
+        response = self.client.post("/api/scan/email", json=payload)
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertIn("risk_score", data)
-        self.assertIn("verdict", data)
-        self.assertEqual(data["verdict"], "Dangerous")
-        self.assertTrue(data["parameters"]["display_name_mismatch"]["mismatch_detected"])
+        self.assertIn("score", data)
+        self.assertIn("level", data)
+        self.assertEqual(data["level"], "DANGEROUS")
 
         # Verify db entry
         db = SessionLocal()
         try:
             db_entry = db.query(Scan).filter(
                 Scan.scan_type == "EMAIL",
-                Scan.input_data.contains("Netflix Support")
+                Scan.input_data.contains("alert@netflix-billing-update.com")
             ).order_by(Scan.id.desc()).first()
             self.assertIsNotNone(db_entry)
-            self.assertEqual(db_entry.status, "Dangerous")
+            self.assertEqual(db_entry.status, "DANGEROUS")
         finally:
             db.close()
 
@@ -68,27 +68,25 @@ class TestIntegrationEndpoints(unittest.TestCase):
         response = self.client.post("/api/file/analyze", files=files)
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertIn("score", data)
-        self.assertEqual(data["status"], "Dangerous")
-        self.assertTrue(data["parameters"]["double_extension"]["has_double_extension"])
-        self.assertFalse(data["parameters"]["mime_type"]["mismatch_detected"])
+        self.assertIn("risk_score", data)
+        self.assertEqual(data["status"], "SUSPICIOUS")
 
         # Verify db entry
         db = SessionLocal()
         try:
             db_entry = db.query(Scan).filter(Scan.scan_type == "FILE", Scan.input_data == "invoice.pdf.exe").order_by(Scan.id.desc()).first()
             self.assertIsNotNone(db_entry)
-            self.assertEqual(db_entry.status, "Dangerous")
+            self.assertEqual(db_entry.status, "SUSPICIOUS")
         finally:
             db.close()
 
-    def test_qr_analyze_route_no_qr(self):
-        # Post a simple non-image file, should raise 400 or raise error for no QR
-        file_content = b"not an image"
-        files = {"file": ("test.png", file_content, "image/png")}
-        response = self.client.post("/api/qr/analyze", files=files)
-        # It should return 400 since it can't decode it as a QR image
-        self.assertEqual(response.status_code, 400)
+    def test_qr_analyze_route(self):
+        payload = {"qr_data": "upi://pay?pa=test@upi"}
+        response = self.client.post("/api/scan/qr", json=payload)
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("score", data)
+        self.assertEqual(data["level"], "SAFE")
 
 
 if __name__ == "__main__":

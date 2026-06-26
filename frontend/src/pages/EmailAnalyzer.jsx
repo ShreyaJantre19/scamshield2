@@ -37,33 +37,19 @@ function EmailAnalyzer() {
         try {
 
             const response = await fetch(
-
-                "http://127.0.0.1:8000/scan/email",
-
+                "/api/scan/email",
                 {
-
                     method: "POST",
-
                     headers: {
-
                         "Content-Type": "application/json"
-
                     },
-
                     body: JSON.stringify({
-
                         from_email: fromEmail,
-
                         reply_to: replyTo,
-
                         subject: subject,
-
                         body: body
-
                     })
-
                 }
-
             );
 
             const data = await response.json();

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "/api";
 
 const API = axios.create({
   baseURL: API_BASE_URL,
@@ -32,7 +32,7 @@ export async function analyzeURL(url) {
 
 export async function getReports() {
   const response = await fetch(
-    `${API_BASE_URL}/reports`
+    `${API_BASE_URL}/history`
   );
 
   return response.json();
@@ -40,7 +40,7 @@ export async function getReports() {
 
 export async function askChatbot(message) {
   const response = await fetch(
-    `${API_BASE_URL}/api/chat`,
+    `${API_BASE_URL}/chat`,
     {
       method: "POST",
       headers: {
@@ -61,7 +61,7 @@ export async function analyzeFile(file) {
   formData.append("file", file);
 
   const response = await fetch(
-    `${API_BASE_URL}/api/file/analyze`,
+    `${API_BASE_URL}/file/analyze`,
     {
       method: "POST",
       body: formData,
@@ -69,4 +69,4 @@ export async function analyzeFile(file) {
   );
 
   return response.json();
-} 
+}

@@ -11,10 +11,15 @@ import uuid
 import tempfile
 from typing import Optional
 
+# pyrefly: ignore [missing-import]
 from services.url_service import analyze_url
+# pyrefly: ignore [missing-import]
 from services.email_service import analyze_email
+# pyrefly: ignore [missing-import]
 from services.qr_service import decode_qr, detect_qr_type, analyze_qr_risks
+# pyrefly: ignore [missing-import]
 from services.file_service import analyze_file as _analyze_file
+# pyrefly: ignore [missing-import]
 from services.ai_service import generate_explanation
 
 # ---------------------------------------------------------------------------

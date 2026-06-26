@@ -1,5 +1,5 @@
 # pyrefly: ignore [missing-import]
-from Levenshtein import distance
+from rapidfuzz.distance.Levenshtein import distance
 from utils.brand_database import BRANDS
 
 

@@ -25,7 +25,7 @@ function URLChecker() {
         try {
 
             const response = await fetch(
-                "http://127.0.0.1:8000/scan/url",
+                "/api/scan/url",
                 {
                     method: "POST",
                     headers: {

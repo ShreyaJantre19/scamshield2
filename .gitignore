@@ -34,3 +34,6 @@ env/
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# SQLite Databases
+*.db
