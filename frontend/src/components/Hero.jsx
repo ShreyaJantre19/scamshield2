@@ -1,197 +1,99 @@
-import { FaShieldAlt, FaArrowRight, FaPlay } from "react-icons/fa";
+import { FaShieldAlt, FaPlay } from "react-icons/fa";
+import ShieldLogo from "./ShieldLogo";
+import "./Hero.css";
 
 export default function Hero() {
+    const cards = [
+        {
+            title: "URL Protection",
+            status: "Safe ✓",
+            className: "card-one",
+        },
+        {
+            title: "QR Scanner",
+            status: "Secure ✓",
+            className: "card-two",
+        },
+        {
+            title: "File Scanner",
+            status: "No Threats ✓",
+            className: "card-three",
+        },
+        {
+            title: "Email Analyzer",
+            status: "Protected ✓",
+            className: "card-four",
+        },
+    ];
+
     return (
-        <section
-            style={{
-                background:
-                    "linear-gradient(135deg,#0f172a 0%,#1e3a8a 45%,#2563eb 100%)",
-                color: "white",
-                minHeight: "88vh",
-                display: "flex",
-                alignItems: "center",
-                padding: "70px 8%",
-            }}
-        >
-            <div
-                style={{
-                    maxWidth: "1300px",
-                    width: "100%",
-                    margin: "auto",
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "60px",
-                    alignItems: "center",
-                }}
-            >
-                {/* LEFT */}
+        <section className="hero">
 
-                <div>
-                    <div
-                        style={{
-                            display: "inline-block",
-                            background: "#2563eb",
-                            padding: "8px 18px",
-                            borderRadius: "999px",
-                            fontWeight: 600,
-                            marginBottom: "25px",
-                            fontSize: "14px",
-                        }}
-                    >
+            <div className="hero-container">
+
+                {/* Left Side */}
+
+                <div className="hero-left">
+
+                    <span className="hero-badge">
                         AI POWERED PROTECTION
-                    </div>
+                    </span>
 
-                    <h1
-                        style={{
-                            fontSize: "68px",
-                            lineHeight: "1.05",
-                            fontWeight: 800,
-                            marginBottom: "25px",
-                        }}
-                    >
+                    <h1>
                         Stay Safe from
                         <br />
                         Scams,
                         <br />
                         Phishing &
                         <br />
-                        <span style={{ color: "#7dd3fc" }}>
-                            Malicious Threats
-                        </span>
+                        <span>Malicious Threats</span>
                     </h1>
 
-                    <p
-                        style={{
-                            fontSize: "21px",
-                            color: "#dbeafe",
-                            maxWidth: "600px",
-                            lineHeight: "1.8",
-                        }}
-                    >
+                    <p>
                         ScamShield uses advanced AI technology to detect phishing
-                        websites, malicious QR codes, dangerous files and fraudulent
-                        emails before they can harm you.
+                        websites, malicious QR codes, dangerous files and
+                        fraudulent emails before they can harm you.
                     </p>
 
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: "18px",
-                            marginTop: "45px",
-                        }}
-                    >
-                        <button
-                            style={{
-                                background: "#3b82f6",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "14px",
-                                padding: "16px 30px",
-                                fontSize: "18px",
-                                fontWeight: "600",
-                                cursor: "pointer",
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "10px",
-                            }}
-                        >
-                            <FaShieldAlt />
-                            Start Scanning
+                    <div className="hero-buttons">
+
+                        <button className="secondary-btn">
+
+                            <FaPlay />
+
+                            Learn More
+
                         </button>
 
-                        <button
-                            style={{
-                                background: "transparent",
-                                color: "white",
-                                border: "2px solid white",
-                                borderRadius: "14px",
-                                padding: "16px 30px",
-                                fontSize: "18px",
-                                fontWeight: "600",
-                                cursor: "pointer",
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "10px",
-                            }}
-                        >
-                            <FaPlay />
-                            Learn More
-                        </button>
                     </div>
+
                 </div>
 
-                {/* RIGHT */}
+                {/* Right Side */}
 
-                <div
-                    style={{
-                        position: "relative",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}
-                >
-                    <div
-                        style={{
-                            width: "340px",
-                            height: "340px",
-                            borderRadius: "50%",
-                            background:
-                                "radial-gradient(circle,#60a5fa 0%,#2563eb 100%)",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            boxShadow: "0 0 120px rgba(59,130,246,.5)",
-                        }}
-                    >
-                        <FaShieldAlt color="white" size={150} />
+                <div className="hero-right">
+
+                    <div className="shield-circle">
+
+                        <ShieldLogo size={220} />
+
                     </div>
 
-                    {[
-                        {
-                            title: "URL Protection",
-                            status: "Safe ✓",
-                            top: "40px",
-                            left: "-30px",
-                        },
-                        {
-                            title: "QR Scanner",
-                            status: "Secure ✓",
-                            top: "80px",
-                            right: "-30px",
-                        },
-                        {
-                            title: "File Scanner",
-                            status: "No Threats ✓",
-                            bottom: "80px",
-                            left: "0px",
-                        },
-                        {
-                            title: "Email Analyzer",
-                            status: "Protected ✓",
-                            bottom: "30px",
-                            right: "-10px",
-                        },
-                    ].map((card, i) => (
+                    {cards.map((card) => (
                         <div
-                            key={i}
-                            style={{
-                                position: "absolute",
-                                ...card,
-                                background: "#111827",
-                                borderRadius: "16px",
-                                padding: "16px 22px",
-                                minWidth: "180px",
-                                boxShadow: "0 20px 40px rgba(0,0,0,.3)",
-                            }}
+                            key={card.title}
+                            className={`floating-card ${card.className}`}
                         >
-                            <div style={{ fontWeight: 700 }}>{card.title}</div>
-                            <div style={{ color: "#4ade80", marginTop: "6px" }}>
-                                {card.status}
-                            </div>
+                            <h4>{card.title}</h4>
+
+                            <span>{card.status}</span>
+
                         </div>
                     ))}
                 </div>
+
             </div>
+
         </section>
     );
-} 
+}

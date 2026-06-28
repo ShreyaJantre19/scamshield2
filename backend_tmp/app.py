@@ -7,8 +7,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from Backend.database.database import engine, Base
-from Backend.models.scan import Scan
+from database.database import engine, Base
+from models.scan import Scan
 
 # Initialize database tables on startup
 Base.metadata.create_all(bind=engine)

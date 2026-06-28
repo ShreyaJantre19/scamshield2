@@ -1,91 +1,138 @@
-import { Link } from "react-router-dom";
-import { FaShieldAlt } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import {
+  FaArrowRight,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
+import ShieldLogo from "./ShieldLogo";
+import QuickScanModal from "./QuickScanModal";
+import "./Navbar.css";
 
 function Navbar() {
+  const location = useLocation();
+
+  const [showQuickScan, setShowQuickScan] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Report Scam", path: "/report-scam" },
+    { name: "Dashboard", path: "/dashboard" },
+  ];
+
   return (
-    <nav
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 1000,
-        background: "#0f172a",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-        backdropFilter: "blur(12px)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1280px",
-          margin: "auto",
-          padding: "18px 40px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        {/* Logo */}
+    <>
+      <nav className="navbar">
 
-        <Link
-          to="/"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            color: "white",
-            textDecoration: "none",
-            fontWeight: "700",
-            fontSize: "32px",
-          }}
-        >
-          <FaShieldAlt color="#3b82f6" size={34} />
-          ScamShield
-        </Link>
+        <div className="navbar-container">
 
-        {/* Navigation */}
+          {/* Logo */}
 
-        <div
-          style={{
-            display: "flex",
-            gap: "40px",
-            alignItems: "center",
-          }}
-        >
-          <Link
-            to="/"
-            style={{
-              color: "white",
-              textDecoration: "none",
-              fontWeight: "600",
-            }}
-          >
-            Home
+          <Link to="/" className="logo">
+
+            <ShieldLogo size={58} />
+
+              <div>
+
+                <h2 className="brand-title">
+                  Scam<span>Shield</span>
+                </h2>
+
+                <div className="logo-subtitle">
+                  AI CYBERSECURITY
+                </div>
+
+              </div>
+
           </Link>
 
-          <Link
-            to="/about"
-            style={{
-              color: "white",
-              textDecoration: "none",
-              fontWeight: "600",
-            }}
-          >
-            About
-          </Link>
+          {/* Desktop Navigation */}
 
-          <Link
-            to="/report-scam"
-            style={{
-              color: "white",
-              textDecoration: "none",
-              fontWeight: "600",
-            }}
+          <div className="desktop-nav">
+
+            {links.map((link) => (
+
+              <Link
+                key={link.path}
+                to={link.path}
+                className={
+                  location.pathname === link.path
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+              >
+                {link.name}
+              </Link>
+
+            ))}
+
+            <button
+              className="scan-btn"
+              onClick={() => setShowQuickScan(true)}
+            >
+              Start Scan
+              <FaArrowRight />
+            </button>
+
+          </div>
+
+          {/* Mobile Hamburger */}
+
+          <button
+            className="menu-btn"
+            onClick={() => setMenuOpen(!menuOpen)}
           >
-            Report Scam
-          </Link>
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+          {/* Mobile Menu */}
+
+          {menuOpen && (
+            <div className="mobile-menu">
+
+              {links.map((link) => (
+
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={
+                    location.pathname === link.path
+                      ? "mobile-link active"
+                      : "mobile-link"
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+
+              ))}
+
+              <button
+                className="mobile-scan-btn"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setShowQuickScan(true);
+                }}
+              >
+                Start Scan
+                <FaArrowRight />
+              </button>
+
+            </div>
+          )}
+
         </div>
-      </div>
-    </nav>
+
+      </nav>
+
+      <QuickScanModal
+        open={showQuickScan}
+        onClose={() => setShowQuickScan(false)}
+      />
+
+    </>
   );
 }
 
-export default Navbar;  
+export default Navbar;
