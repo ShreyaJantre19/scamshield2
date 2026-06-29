@@ -1,10 +1,10 @@
 import Navbar from "../components/Navbar";
-import DashboardCard from "../components/DashBoard/DashboardCard";
-import ActivityCard from "../components/DashBoard/ActivityCard";
-import QuickAction from "../components/DashBoard/QuickAction";
-import ScanItem from "../components/DashBoard/ScanItem";
-import ThreatMonitor from "../components/DashBoard/ThreatMonitor";
-import SecurityGauge from "../components/DashBoard/SecurityGauge";
+import DashboardCard from "../components/Dashboard/DashboardCard";
+import ActivityCard from "../components/Dashboard/ActivityCard";
+import QuickAction from "../components/Dashboard/QuickAction";
+import ScanItem from "../components/Dashboard/ScanItem";
+import ThreatMonitor from "../components/Dashboard/ThreatMonitor";
+import SecurityGauge from "../components/Dashboard/SecurityGauge";
 
 import {
   FaExclamationTriangle,
